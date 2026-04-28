@@ -6,6 +6,15 @@ jobs:
   comment-on-issue:
     runs-on: ubuntu-latest
     steps:
-    - name: "Dump issue context"
-      run: echo '${{ toJson(github.event) }}' | jq
+    # - name: "Dump issue context"
+    #  run: echo '${{ toJson(github.event) }}' | jq
+
+    - name: "Create comment"
+      uses: peter-evans/create-or-update-comment@v5
+      with:
+        issue-number: ${{ github.event.issue.number }}
+        body: |
+          We have got your issue.
+          We are currently reviewing it with the internal team, and update you shortly.
+        reactions: '+1'
       
